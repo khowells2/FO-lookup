@@ -21,7 +21,7 @@ def search_citable_reference(text_string, dataframe):
     Extracts digits after the last '/' and between the first and second '/',
     formats the code digits as 'Code XX', searches 'description' column using a precise regex,
     extracts file number ranges from the description, filters based on file number,
-    and returns a table of 'citable reference' and 'description' for matching rows.
+    and returns a table of 'citable reference', 'description', 'context description', and 'covering dates' for matching rows.
     """
     try:
         # Split the text_string by '/'
@@ -81,7 +81,7 @@ def search_citable_reference(text_string, dataframe):
         )]
 
         # Remove the temporary 'File_Range' column
-        result_rows = result_rows[['Citable Reference', 'Description']]
+        result_rows = result_rows[['Citable Reference', 'Description', 'Context Description', 'Covering Dates']]
 
         # Return the 'Citable Reference' and 'Description' for all matching rows
         if not result_rows.empty:
@@ -96,7 +96,7 @@ def search_citable_reference(text_string, dataframe):
 def main():
     """Defines the layout and flow of the Streamlit app."""
     st.title("FO Correspondence Discovery Search")
-    st.write("Enter a text string with '/' to search for corresponding records in the FO correspondence data.")
+    st.write("Enter a Foreign Office Index Code to search for corresponding records in the FO correspondence.")
 
     # Load the data using the cached function
     csv_file_path = "FO correspondence discovery download 1920-25.csv"
